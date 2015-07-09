@@ -1,0 +1,53 @@
+/*
+ * Copyright 2015 Tolriq / Genimee.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package tv.yatse.plugin.avreceiver.api;
+
+import tv.yatse.plugin.avreceiver.api.PluginCustomCommand;
+
+interface IReceiverPluginInterface {
+    int getVolumeUnitType();
+
+    double getVolumeMinimalValue();
+
+    double getVolumeMaximalValue();
+
+    boolean setMuteStatus(in boolean status);
+
+    boolean getMuteStatus();
+
+    boolean toggleMuteStatus();
+
+    boolean setVolumeLevel(in double volume);
+
+    double getVolumeLevel();
+
+    boolean volumePlus();
+
+    boolean volumeMinus();
+
+    boolean refresh();
+
+    List<PluginCustomCommand> getDefaultCustomCommands();
+
+    boolean executeCustomCommand(in PluginCustomCommand customCommand);
+
+    long getSettingsVersion();
+
+    String getSettings();
+
+    boolean restoreSettings(in String settings, in long version);
+}
