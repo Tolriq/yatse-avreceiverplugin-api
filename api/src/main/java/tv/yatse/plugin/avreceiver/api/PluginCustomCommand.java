@@ -19,6 +19,7 @@ package tv.yatse.plugin.avreceiver.api;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -494,4 +495,61 @@ public class PluginCustomCommand implements Parcelable {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof PluginCustomCommand)) {
+            return false;
+        }
+        PluginCustomCommand other = (PluginCustomCommand) o;
+        return mColor == other.color()
+                && TextUtils.equals(mDescription, other.description())
+                && TextUtils.equals(mIcon, other.icon())
+                && TextUtils.equals(mParam1, other.param1())
+                && TextUtils.equals(mParam2, other.param2())
+                && TextUtils.equals(mParam3, other.param3())
+                && TextUtils.equals(mParam4, other.param4())
+                && TextUtils.equals(mParam5, other.param5())
+                && mReadOnly == other.readOnly()
+                && TextUtils.equals(mSource, other.source())
+                && TextUtils.equals(mTitle, other.title())
+                && mType == other.type();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = mColor;
+        if (mDescription != null) {
+            hash = (31 * hash + mDescription.hashCode());
+        }
+        if (mIcon != null) {
+            hash = (31 * hash + mIcon.hashCode());
+        }
+        if (mParam1 != null) {
+            hash = (31 * hash + mParam1.hashCode());
+        }
+        if (mParam2 != null) {
+            hash = (31 * hash + mParam2.hashCode());
+        }
+        if (mParam3 != null) {
+            hash = (31 * hash + mParam3.hashCode());
+        }
+        if (mParam4 != null) {
+            hash = (31 * hash + mParam4.hashCode());
+        }
+        if (mParam5 != null) {
+            hash = (31 * hash + mParam5.hashCode());
+        }
+        hash = 31 * hash + (mReadOnly ? 1 : 0);
+        if (mSource != null) {
+            hash = (31 * hash + mSource.hashCode());
+        }
+        if (mTitle != null) {
+            hash = (31 * hash + mTitle.hashCode());
+        }
+        hash = 31 * hash + mType;
+        return hash;
+    }
 }
