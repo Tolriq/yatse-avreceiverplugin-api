@@ -16,7 +16,10 @@
 
 package tv.yatse.plugin.avreceiver.sample;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +30,12 @@ import tv.yatse.plugin.avreceiver.api.YatseLogger;
 import tv.yatse.plugin.avreceiver.sample.helpers.PreferencesHelper;
 
 /**
- * Sample AVReceiverPluginService that implement all functions with dummy code that only logs to Yatse logging system.
- *
+ * Sample AVReceiverPluginService that implement all functions with dummy code.
+ * <p/>
  * See {@link AVReceiverPluginService} for documentation on all functions
  */
 public class AVPluginService extends AVReceiverPluginService {
-
+    private Handler handler = new Handler(Looper.getMainLooper());
     private static final String TAG = "AVPluginService";
 
     private String mHostUniqueId;
@@ -65,6 +68,7 @@ public class AVPluginService extends AVReceiverPluginService {
     @Override
     protected boolean setMuteStatus(boolean status) {
         YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Setting mute status : %s", status);
+        displayToast("Setting mute status : " + status);
         mIsMuted = status;
         return true;
     }
@@ -77,13 +81,15 @@ public class AVPluginService extends AVReceiverPluginService {
     @Override
     protected boolean toggleMuteStatus() {
         YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Toggling mute status");
-        setMuteStatus(!mIsMuted);
+        displayToast("Toggling mute status");
+        mIsMuted = !mIsMuted;
         return true;
     }
 
     @Override
     protected boolean setVolumeLevel(double volume) {
         YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Setting volume level : %s", volume);
+        displayToast("Setting volume : " + volume);
         mVolumePercent = volume;
         return true;
     }
@@ -97,6 +103,7 @@ public class AVPluginService extends AVReceiverPluginService {
     protected boolean volumePlus() {
         mVolumePercent = Math.min(100.0, mVolumePercent + 5);
         YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Calling volume plus");
+        displayToast("Volume plus");
         return true;
     }
 
@@ -104,6 +111,7 @@ public class AVPluginService extends AVReceiverPluginService {
     protected boolean volumeMinus() {
         mVolumePercent = Math.max(0.0, mVolumePercent - 5);
         YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Calling volume minus");
+        displayToast("Volume minus");
         return true;
     }
 
@@ -115,12 +123,27 @@ public class AVPluginService extends AVReceiverPluginService {
 
     @Override
     protected List<PluginCustomCommand> getDefaultCustomCommands() {
-        return new ArrayList<>();
+        String source = getString(R.string.plugin_unique_id);
+        List<PluginCustomCommand> commands = new ArrayList<>();
+        commands.add(new PluginCustomCommand().title("Sample command 1").source(source).param1("Sample command 1").type(0));
+        commands.add(new PluginCustomCommand().title("Sample command 2").source(source).param1("Sample command 2").type(1).readOnly(true));
+        return commands;
     }
 
     @Override
     protected boolean executeCustomCommand(PluginCustomCommand customCommand) {
+        YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Executing CustomCommand : %s", customCommand.title());
+        displayToast(customCommand.param1());
         return false;
+    }
+
+    private void displayToast(final String message) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

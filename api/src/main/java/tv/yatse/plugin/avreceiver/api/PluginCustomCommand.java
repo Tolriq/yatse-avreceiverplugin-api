@@ -40,6 +40,7 @@ public class PluginCustomCommand implements Parcelable {
     private static final String KEY_ID = "id";
     private static final String KEY_COLOR = "color";
     private static final String KEY_DESCRIPTION = "description";
+    private static final String KEY_DISPLAY_ORDER = "display_order";
     private static final String KEY_ICON = "icon";
     private static final String KEY_PARAM1 = "param1";
     private static final String KEY_PARAM2 = "param2";
@@ -54,6 +55,7 @@ public class PluginCustomCommand implements Parcelable {
     private long mId;
     private int mColor;
     private String mDescription;
+    private int mDisplayOrder;
     private String mIcon;
     private String mParam1;
     private String mParam2;
@@ -66,19 +68,21 @@ public class PluginCustomCommand implements Parcelable {
     private int mType;
 
     /**
-     * Id long.
+     * The Custom Command id.<br />
+     * This value is internal to Yatse and should not be filled / edited by plugins
      *
-     * @return the long
+     * @return the id
      */
     public long id() {
         return mId;
     }
 
     /**
-     * Id plugin custom command.
+     * Set the Custom Command id.<br />
+     * This value is internal to Yatse and should not be filled / edited by plugins
      *
      * @param id the id
-     * @return the plugin custom command
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand id(long id) {
         mId = id;
@@ -86,19 +90,21 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Color int.
+     * Return the custom command color.<br />
+     * This value is not yet used by Yatse.
      *
-     * @return the int
+     * @return the color
      */
     public int color() {
         return mColor;
     }
 
     /**
-     * Color plugin custom command.
+     * Set the custom command color.<br />
+     * This value is not yet used by Yatse.
      *
      * @param color the color
-     * @return the plugin custom command
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand color(int color) {
         mColor = color;
@@ -106,19 +112,20 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Read only.
+     * Return the readOnly status of the custom command.
      *
-     * @return the boolean
+     * @return the readOnly status
      */
     public boolean readOnly() {
         return mReadOnly;
     }
 
     /**
-     * Read only.
+     * Set the readOnly status of the custom command.
+     * If true, the user will only be allowed to rename the command but not edit it.
      *
-     * @param readOnly the read only
-     * @return the plugin custom command
+     * @param readOnly the read only status
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand readOnly(boolean readOnly) {
         mReadOnly = readOnly;
@@ -126,7 +133,7 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Description string.
+     * Return the description of the custom command.
      *
      * @return the string
      */
@@ -135,10 +142,10 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Description plugin custom command.
+     * Set the description of the custom command.
      *
      * @param description the description
-     * @return the plugin custom command
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand description(String description) {
         mDescription = description;
@@ -146,19 +153,43 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Icon string.
+     * Return the displayOrder of the custom command.<br />
+     * This value is internal to Yatse and should not be filled / edited by plugins
      *
-     * @return the string
+     * @return the displayOrder
+     */
+    public int displayOrder() {
+        return mDisplayOrder;
+    }
+
+    /**
+     * Set the displayOrder of the custom command.<br />
+     * This value is internal to Yatse and should not be filled / edited by plugins
+     *
+     * @param displayOrder the displayOrder
+     * @return the PluginCustomCommand for chaining
+     */
+    public PluginCustomCommand displayOrder(int displayOrder) {
+        mDisplayOrder = displayOrder;
+        return this;
+    }
+
+    /**
+     * Return the custom command icon.<br />
+     * This value is not yet used by Yatse.
+     *
+     * @return the icon name
      */
     public String icon() {
         return mIcon;
     }
 
     /**
-     * Icon plugin custom command.
+     * Set the custom command color.<br />
+     * This value is not yet used by Yatse.
      *
-     * @param icon the icon
-     * @return the plugin custom command
+     * @param icon the icon name
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand icon(String icon) {
         mIcon = icon;
@@ -166,19 +197,21 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Param 1.
+     * Return the custom command param1.<br />
+     * This string parameter is available to store any needed parameter for this plugin custom command.
      *
-     * @return the string
+     * @return the parameter
      */
     public String param1() {
         return mParam1;
     }
 
     /**
-     * Param 1.
+     * Set the custom command param1.<br />
+     * This string parameter is available to store any needed parameter for this plugin custom command.
      *
      * @param param1 the param 1
-     * @return the plugin custom command
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand param1(String param1) {
         mParam1 = param1;
@@ -186,19 +219,21 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Param 2.
+     * Return the custom command param2.<br />
+     * This string parameter is available to store any needed parameter for this plugin custom command.
      *
-     * @return the string
+     * @return the parameter
      */
     public String param2() {
         return mParam2;
     }
 
     /**
-     * Param 2.
+     * Set the custom command param2.<br />
+     * This string parameter is available to store any needed parameter for this plugin custom command.
      *
      * @param param2 the param 2
-     * @return the plugin custom command
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand param2(String param2) {
         mParam2 = param2;
@@ -206,19 +241,21 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Param 3.
+     * Return the custom command param3.<br />
+     * This string parameter is available to store any needed parameter for this plugin custom command.
      *
-     * @return the string
+     * @return the parameter
      */
     public String param3() {
         return mParam3;
     }
 
     /**
-     * Param 3.
+     * Set the custom command param3.<br />
+     * This string parameter is available to store any needed parameter for this plugin custom command.
      *
      * @param param3 the param 3
-     * @return the plugin custom command
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand param3(String param3) {
         mParam3 = param3;
@@ -226,19 +263,21 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Param 4.
+     * Return the custom command param4.<br />
+     * This string parameter is available to store any needed parameter for this plugin custom command.
      *
-     * @return the string
+     * @return the parameter
      */
     public String param4() {
         return mParam4;
     }
 
     /**
-     * Param 4.
+     * Set the custom command param4.<br />
+     * This string parameter is available to store any needed parameter for this plugin custom command.
      *
      * @param param4 the param 4
-     * @return the plugin custom command
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand param4(String param4) {
         mParam4 = param4;
@@ -246,19 +285,21 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Param 5.
+     * Return the custom command param5.<br />
+     * This string parameter is available to store any needed parameter for this plugin custom command.
      *
-     * @return the string
+     * @return the parameter
      */
     public String param5() {
         return mParam5;
     }
 
     /**
-     * Param 5.
+     * Set the custom command param5.<br />
+     * This string parameter is available to store any needed parameter for this plugin custom command.
      *
      * @param param5 the param 5
-     * @return the plugin custom command
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand param5(String param5) {
         mParam5 = param5;
@@ -266,7 +307,8 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Source string.
+     * Return the custom command source.<br />
+     * This value must always match the plugin uniqueId !
      *
      * @return the string
      */
@@ -275,10 +317,11 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Source plugin custom command.
+     * Set the custom command source.<br />
+     * This value must always match the plugin uniqueId !
      *
      * @param source the source
-     * @return the plugin custom command
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand source(String source) {
         mSource = source;
@@ -286,7 +329,7 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Title string.
+     * Return the custom command title.<br />
      *
      * @return the string
      */
@@ -295,10 +338,11 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Title plugin custom command.
+     * Set the custom command title.<br />
+     * This value must not be null !
      *
      * @param title the title
-     * @return the plugin custom command
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand title(String title) {
         mTitle = title;
@@ -306,7 +350,8 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Type int.
+     * Return the custom command type.<br />
+     * This int parameter is available to store any needed parameter for this plugin custom command.
      *
      * @return the int
      */
@@ -315,10 +360,11 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Type plugin custom command.
+     * Set the custom command type.<br />
+     * This int parameter is available to store any needed parameter for this plugin custom command.
      *
      * @param type the type
-     * @return the plugin custom command
+     * @return the PluginCustomCommand for chaining
      */
     public PluginCustomCommand type(int type) {
         mType = type;
@@ -326,9 +372,9 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Instantiates a new Plugin custom command.
+     * Instantiates a new PluginCustomCommand from a parcel.
      *
-     * @param in the in
+     * @param in the Parcel
      */
     protected PluginCustomCommand(Parcel in) {
         readFromParcel(in);
@@ -366,6 +412,7 @@ public class PluginCustomCommand implements Parcelable {
         dest.writeLong(mId);
         dest.writeInt(mColor);
         dest.writeString(mDescription);
+        dest.writeInt(mDisplayOrder);
         dest.writeString(mIcon);
         dest.writeString(mParam1);
         dest.writeString(mParam2);
@@ -384,6 +431,7 @@ public class PluginCustomCommand implements Parcelable {
             mId = in.readLong();
             mColor = in.readInt();
             mDescription = in.readString();
+            mDisplayOrder = in.readInt();
             mIcon = in.readString();
             mParam1 = in.readString();
             mParam2 = in.readString();
@@ -398,9 +446,9 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Serialize jSON object.
+     * Serialize to JSONObject.
      *
-     * @return the jSON object
+     * @return the JSONObject
      * @throws JSONException the jSON exception
      */
     public JSONObject serialize() throws JSONException {
@@ -409,6 +457,7 @@ public class PluginCustomCommand implements Parcelable {
         data.put(KEY_ID, mId);
         data.put(KEY_COLOR, mColor);
         data.put(KEY_DESCRIPTION, mDescription);
+        data.put(KEY_DESCRIPTION, mDisplayOrder);
         data.put(KEY_ICON, mIcon);
         data.put(KEY_PARAM1, mParam1);
         data.put(KEY_PARAM2, mParam2);
@@ -423,9 +472,9 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Deserialize void.
+     * Deserialize from a JSONObject.
      *
-     * @param data the data
+     * @param data the JSONObject
      * @throws JSONException the jSON exception
      */
     public void deserialize(JSONObject data) throws JSONException {
@@ -434,6 +483,7 @@ public class PluginCustomCommand implements Parcelable {
             this.mId = data.optInt(KEY_ID);
             this.mColor = data.optInt(KEY_COLOR);
             this.mDescription = data.optString(KEY_DESCRIPTION);
+            this.mDisplayOrder = data.optInt(KEY_DISPLAY_ORDER);
             this.mIcon = data.optString(KEY_ICON);
             this.mParam1 = data.optString(KEY_PARAM1);
             this.mParam2 = data.optString(KEY_PARAM2);
@@ -448,7 +498,7 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * To bundle.
+     * Save to a {@link Bundle}.
      *
      * @return the bundle
      */
@@ -458,6 +508,7 @@ public class PluginCustomCommand implements Parcelable {
         data.putLong(KEY_ID, mId);
         data.putInt(KEY_COLOR, mColor);
         data.putString(KEY_DESCRIPTION, mDescription);
+        data.putInt(KEY_DISPLAY_ORDER, mDisplayOrder);
         data.putString(KEY_ICON, mIcon);
         data.putString(KEY_PARAM1, mParam1);
         data.putString(KEY_PARAM2, mParam2);
@@ -472,9 +523,9 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * From bundle.
+     * Load from a {@link Bundle}.
      *
-     * @param src the src
+     * @param src the Bundle
      */
     public void fromBundle(Bundle src) {
         int version = src.getInt(KEY_VERSION);
@@ -482,6 +533,7 @@ public class PluginCustomCommand implements Parcelable {
             this.mId = src.getInt(KEY_ID);
             this.mColor = src.getInt(KEY_COLOR);
             this.mDescription = src.getString(KEY_DESCRIPTION);
+            this.mDisplayOrder = src.getInt(KEY_DISPLAY_ORDER);
             this.mIcon = src.getString(KEY_ICON);
             this.mParam1 = src.getString(KEY_PARAM1);
             this.mParam2 = src.getString(KEY_PARAM2);
