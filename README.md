@@ -2,4 +2,10 @@
 
 API and Sample for Yatse Audio/Video receiver plugins
 
-This is currently a work in progress, do not release public plugins until the API reach 1.0 as they will not work.
+api folder contains the API to include in your project.
+
+sample folder contains a fully working plugin that shows everything you need to write a complete plugin.
+
+Documentation will be improved soon.
+
+Do not forget to generate a new unique id for your plugin.
