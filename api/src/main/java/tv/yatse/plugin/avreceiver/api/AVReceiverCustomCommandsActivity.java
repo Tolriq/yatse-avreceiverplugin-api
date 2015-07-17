@@ -32,7 +32,7 @@ public class AVReceiverCustomCommandsActivity extends Activity {
     public final static String EXTRA_CUSTOM_COMMAND = "tv.yatse.plugin.avreceiver.EXTRA_CUSTOM_COMMAND";
 
     protected PluginCustomCommand pluginCustomCommand;
-    protected boolean isEditing;
+    private boolean mIsEditing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +40,21 @@ public class AVReceiverCustomCommandsActivity extends Activity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            isEditing = intent.hasExtra(EXTRA_CUSTOM_COMMAND);
-            if (isEditing) {
+            mIsEditing = intent.hasExtra(EXTRA_CUSTOM_COMMAND);
+            if (mIsEditing) {
                 pluginCustomCommand = intent.getParcelableExtra(EXTRA_CUSTOM_COMMAND);
             } else {
                 pluginCustomCommand = new PluginCustomCommand();
             }
         }
         setResult(RESULT_CANCELED, new Intent());
+    }
+
+    /**
+     * @return true is editing an existing Custom Command
+     */
+    protected boolean isEditing() {
+        return mIsEditing;
     }
 
     /**

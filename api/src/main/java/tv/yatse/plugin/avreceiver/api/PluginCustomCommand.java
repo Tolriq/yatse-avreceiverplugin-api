@@ -29,6 +29,7 @@ import org.json.JSONObject;
  * <p/>
  * Not yet used, out of date documentation
  */
+@SuppressWarnings("unused")
 public class PluginCustomCommand implements Parcelable {
 
     /**

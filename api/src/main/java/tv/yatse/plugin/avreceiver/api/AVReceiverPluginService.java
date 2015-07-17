@@ -29,6 +29,7 @@ import java.util.List;
  * <p/>
  * Unless noted in command description most commands can be called from main thread so should handled this correctly : Fast and no network / disk access.
  */
+@SuppressWarnings("unused")
 public abstract class AVReceiverPluginService extends Service {
 
     /**

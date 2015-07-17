@@ -38,7 +38,7 @@ public class CustomCommandsActivity extends AVReceiverCustomCommandsActivity {
         setContentView(R.layout.activity_custom_commands);
 
         ButterKnife.bind(this);
-        if (isEditing) {
+        if (isEditing()) {
             mViewTitle.setText(pluginCustomCommand.title());
             mViewParam1.setText(pluginCustomCommand.param1());
         }
