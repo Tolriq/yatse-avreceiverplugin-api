@@ -17,7 +17,7 @@
 apply plugin: 'com.android.library'
 
 archivesBaseName = 'yatse-avreceiver-api'
-version = 0.8
+version = 1.0
 
 android {
     compileSdkVersion 22
