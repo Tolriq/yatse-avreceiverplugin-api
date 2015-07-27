@@ -51,14 +51,14 @@ public class AVReceiverCustomCommandsActivity extends Activity {
     }
 
     /**
-     * @return true is editing an existing Custom Command
+     * @return true if editing an existing custom command
      */
     protected boolean isEditing() {
         return mIsEditing;
     }
 
     /**
-     * Cancel and finish.
+     * Cancel adding / editing and finish the activity.
      */
     protected void cancelAndFinish() {
         setResult(RESULT_CANCELED, new Intent());
@@ -66,7 +66,7 @@ public class AVReceiverCustomCommandsActivity extends Activity {
     }
 
     /**
-     * Save and finish.
+     * Finish the activity and return the added / updated custom command to Yatse.
      */
     protected void saveAndFinish() {
         Intent result = new Intent();
