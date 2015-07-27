@@ -27,7 +27,7 @@ import org.json.JSONObject;
 /**
  * The type PluginCustomCommand.
  * <p/>
- * Not yet used, out of date documentation
+ * This is the definition of custom commands that plugins can use to allow integration in Yatse.
  */
 @SuppressWarnings("unused")
 public class PluginCustomCommand implements Parcelable {
@@ -52,6 +52,7 @@ public class PluginCustomCommand implements Parcelable {
     private static final String KEY_SOURCE = "source";
     private static final String KEY_TITLE = "title";
     private static final String KEY_TYPE = "type";
+    private static final String KEY_UNIQUE_ID = "unique_id";
 
     private long mId;
     private int mColor;
@@ -67,9 +68,10 @@ public class PluginCustomCommand implements Parcelable {
     private String mSource;
     private String mTitle;
     private int mType;
+    private String mUniqueId;
 
     /**
-     * The Custom Command id.<br />
+     * The custom command id.<br />
      * This value is internal to Yatse and should not be filled / edited by plugins
      *
      * @return the id
@@ -79,7 +81,7 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
-     * Set the Custom Command id.<br />
+     * Set the custom command id.<br />
      * This value is internal to Yatse and should not be filled / edited by plugins
      *
      * @param id the id
@@ -124,6 +126,7 @@ public class PluginCustomCommand implements Parcelable {
     /**
      * Set the readOnly status of the custom command.
      * If true, the user will only be allowed to rename the command but not edit it.
+     * <b>Your plugin must define the meta-data <i>customCommandsActivity</i> for Yatse to correctly call your plugin for editing.</b>
      *
      * @param readOnly the read only status
      * @return the PluginCustomCommand for chaining
@@ -144,6 +147,7 @@ public class PluginCustomCommand implements Parcelable {
 
     /**
      * Set the description of the custom command.
+     * This value is not yet used in Yatse.
      *
      * @param description the description
      * @return the PluginCustomCommand for chaining
@@ -309,7 +313,7 @@ public class PluginCustomCommand implements Parcelable {
 
     /**
      * Return the custom command source.<br />
-     * This value must always match the plugin uniqueId !
+     * <b>This value must always match the plugin uniqueId !</b>
      *
      * @return the string
      */
@@ -319,7 +323,7 @@ public class PluginCustomCommand implements Parcelable {
 
     /**
      * Set the custom command source.<br />
-     * This value must always match the plugin uniqueId !
+     * <b>This value must always match the plugin uniqueId !</b>
      *
      * @param source the source
      * @return the PluginCustomCommand for chaining
@@ -373,6 +377,28 @@ public class PluginCustomCommand implements Parcelable {
     }
 
     /**
+     * Return the custom command unique Id.<br />
+     * This value is internal to Yatse and should not be filled / edited by plugins
+     *
+     * @return the string
+     */
+    public String uniqueId() {
+        return mUniqueId;
+    }
+
+    /**
+     * Set the custom command unique Id.<br />
+     * This value is internal to Yatse and should not be filled / edited by plugins
+     *
+     * @param uniqueId the unique Id
+     * @return the PluginCustomCommand for chaining
+     */
+    public PluginCustomCommand uniqueId(String uniqueId) {
+        mUniqueId = uniqueId;
+        return this;
+    }
+
+    /**
      * Instantiates a new PluginCustomCommand from a parcel.
      *
      * @param in the Parcel
@@ -387,9 +413,6 @@ public class PluginCustomCommand implements Parcelable {
     public PluginCustomCommand() {
     }
 
-    /**
-     * The constant CREATOR.
-     */
     public static final Creator<PluginCustomCommand> CREATOR = new Creator<PluginCustomCommand>() {
         @Override
         public PluginCustomCommand createFromParcel(Parcel in) {
@@ -424,6 +447,7 @@ public class PluginCustomCommand implements Parcelable {
         dest.writeString(mSource);
         dest.writeString(mTitle);
         dest.writeInt(mType);
+        dest.writeString(mUniqueId);
     }
 
     private void readFromParcel(Parcel in) {
@@ -443,6 +467,7 @@ public class PluginCustomCommand implements Parcelable {
             mSource = in.readString();
             mTitle = in.readString();
             mType = in.readInt();
+            mUniqueId = in.readString();
         }
     }
 
@@ -469,6 +494,7 @@ public class PluginCustomCommand implements Parcelable {
         data.put(KEY_SOURCE, mSource);
         data.put(KEY_TITLE, mTitle);
         data.put(KEY_TYPE, mType);
+        data.put(KEY_UNIQUE_ID, mUniqueId);
         return data;
     }
 
@@ -495,6 +521,7 @@ public class PluginCustomCommand implements Parcelable {
             this.mSource = data.optString(KEY_SOURCE);
             this.mTitle = data.optString(KEY_TITLE);
             this.mType = data.optInt(KEY_TYPE);
+            this.mUniqueId = data.optString(KEY_UNIQUE_ID);
         }
     }
 
@@ -520,6 +547,7 @@ public class PluginCustomCommand implements Parcelable {
         data.putString(KEY_SOURCE, mSource);
         data.putString(KEY_TITLE, mTitle);
         data.putInt(KEY_TYPE, mType);
+        data.putString(KEY_UNIQUE_ID, mUniqueId);
         return data;
     }
 
@@ -545,6 +573,7 @@ public class PluginCustomCommand implements Parcelable {
             this.mSource = src.getString(KEY_SOURCE);
             this.mTitle = src.getString(KEY_TITLE);
             this.mType = src.getInt(KEY_TYPE);
+            this.mUniqueId = src.getString(KEY_UNIQUE_ID);
         }
     }
 
@@ -568,7 +597,8 @@ public class PluginCustomCommand implements Parcelable {
                 && mReadOnly == other.readOnly()
                 && TextUtils.equals(mSource, other.source())
                 && TextUtils.equals(mTitle, other.title())
-                && mType == other.type();
+                && mType == other.type()
+                && TextUtils.equals(mUniqueId, other.uniqueId());
     }
 
     @Override
@@ -603,6 +633,9 @@ public class PluginCustomCommand implements Parcelable {
             hash = (31 * hash + mTitle.hashCode());
         }
         hash = 31 * hash + mType;
+        if (mUniqueId != null) {
+            hash = (31 * hash + mUniqueId.hashCode());
+        }
         return hash;
     }
 }
