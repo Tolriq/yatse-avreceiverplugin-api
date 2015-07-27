@@ -63,15 +63,19 @@
             <meta-data
                 android:name="description"
                 android:value="@string/sample_plugin_description"/>
+            <!-- The plugin activity that will be called to configure the plugin for the specified Media Center ! -->
             <meta-data
                 android:name="settingsActivity"
                 android:value=".SettingsActivity"/>
+            <!-- Should be set to true if the plugin support manual creation of custom commands (set to false otherwise) ! -->
             <meta-data
                 android:name="supportAddCustomCommands"
                 android:value="true"/>
+            <!-- Should be set to true if the plugin propose some default custom commands to import (set to false otherwise) ! -->
             <meta-data
                 android:name="supportImportCustomCommands"
                 android:value="true"/>
+            <!-- The plugin activity that will be called to add or edit a custom command if the plugin support them ! -->
             <meta-data
                 android:name="customCommandsActivity"
                 android:value=".CustomCommandsActivity"/>

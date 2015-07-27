@@ -30,7 +30,7 @@ import tv.yatse.plugin.avreceiver.api.YatseLogger;
 import tv.yatse.plugin.avreceiver.sample.helpers.PreferencesHelper;
 
 /**
- * Sample AVReceiverPluginService that implement all functions with dummy code.
+ * Sample AVReceiverPluginService that implement all functions with dummy code that displays Toast and logs to main Yatse log system.
  * <p/>
  * See {@link AVReceiverPluginService} for documentation on all functions
  */
@@ -125,6 +125,7 @@ public class AVPluginService extends AVReceiverPluginService {
     protected List<PluginCustomCommand> getDefaultCustomCommands() {
         String source = getString(R.string.plugin_unique_id);
         List<PluginCustomCommand> commands = new ArrayList<>();
+        // Plugin custom commands must set the source parameter to their plugin unique Id !
         commands.add(new PluginCustomCommand().title("Sample command 1").source(source).param1("Sample command 1").type(0));
         commands.add(new PluginCustomCommand().title("Sample command 2").source(source).param1("Sample command 2").type(1).readOnly(true));
         return commands;

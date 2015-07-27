@@ -36,7 +36,7 @@ import tv.yatse.plugin.avreceiver.sample.helpers.PreferencesHelper;
 /**
  * Sample SettingsActivity that handle correctly the parameters passed by Yatse.
  * <p/>
- * It is very important to save the passed extra {@link AVReceiverPluginService#EXTRA_STRING_MEDIA_CENTER_UNIQUE_ID}
+ * You need to save the passed extra {@link AVReceiverPluginService#EXTRA_STRING_MEDIA_CENTER_UNIQUE_ID}
  * and return it in the result intent.
  * <p/>
  * <b>Production plugin should make input validation and tests before accepting the user input and returning RESULT_OK.</b>
