@@ -26,3 +26,13 @@ And edit [SettingsActivity](https://github.com/Tolriq/yatse-avreceiverplugin-api
 The [Wiki](https://github.com/Tolriq/yatse-avreceiverplugin-api/wiki) will contain the up to date documentation for each API versions.
 
 If something is missing just contact me.
+
+## Release
+
+When your plugin works and you are ready to publish it to the world you need to ensure that the description contains the following :
+
+> This plugin is not affiliated to Yatse or its author Tolriq / Genimee.
+>
+> Please request support directly from the author of this plugin : XXX (For PlayStore can be : See contact information below. or a website URL)
+
+Adding a support button in the configuration activity so users can contact you, is a great addition too.
