@@ -147,7 +147,9 @@ public abstract class AVReceiverPluginService extends Service {
     /**
      * Gets the list of default custom commands that Yatse can import.
      * <p/>
-     * <b>This command is not yet supported by Yatse</b>
+     * For commands that can have a lot of different parameters like input change,
+     * please offer the commands via the add custom command Activity and do not return hundreds
+     * of commands.
      *
      * @return the list of custom commands.
      */
@@ -156,7 +158,6 @@ public abstract class AVReceiverPluginService extends Service {
     /**
      * Execute the given custom command.
      * <p/>
-     * <b>This command is not yet supported by Yatse</b>
      *
      * @param customCommand the custom command
      * @return true on success
