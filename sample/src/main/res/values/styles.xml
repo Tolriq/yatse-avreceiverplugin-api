@@ -18,7 +18,12 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat">
-        <item name="colorAccent">@color/material_blue_500</item>
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/dark_2</item>
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@color/dark_3</item>
+        <item name="android:windowBackground">@color/dark_1</item>
+        <item name="colorAccent">@color/accent</item>
         <item name="android:windowSoftInputMode">adjustPan</item>
     </style>
 

@@ -26,7 +26,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import tv.yatse.plugin.avreceiver.api.AVReceiverPluginService;
@@ -49,11 +49,11 @@ public class SettingsActivity extends AppCompatActivity {
     private String mMediaCenterName;
     private boolean mMuted;
 
-    @Bind(R.id.receiver_settings_title)
+    @BindView(R.id.receiver_settings_title)
     TextView mViewSettingsTitle;
-    @Bind(R.id.receiver_ip)
+    @BindView(R.id.receiver_ip)
     EditText mViewReceiverIP;
-    @Bind(R.id.btn_toggle_mute)
+    @BindView(R.id.btn_toggle_mute)
     ImageButton mViewMute;
 
     @Override

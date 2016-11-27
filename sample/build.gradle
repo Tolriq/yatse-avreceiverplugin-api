@@ -17,8 +17,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
 
     defaultConfig {
         applicationId "tv.yatse.plugin.avreceiver.sample"
@@ -37,8 +37,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:design:24.1.1'
-    compile 'com.android.support:support-annotations:24.1.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.android.support:design:25.0.1'
+    compile 'com.android.support:support-annotations:25.0.1'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     compile project(':api')
 }

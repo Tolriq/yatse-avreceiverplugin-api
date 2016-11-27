@@ -42,50 +42,32 @@
                 android:fontFamily="sans-serif-condensed"
                 android:text="@string/sample_plugin_settings"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="18sp"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:background="@color/material_blue_500"/>
+                android:textColor="@color/accent"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/receiver_ip_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="@string/sample_plugin_receiver_ip_description"/>
+                android:text="@string/sample_plugin_receiver_ip_description"
+                android:textColor="@color/white"/>
 
-            <LinearLayout
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:text="@string/sample_plugin_receiver_ip"
-                    android:textColor="@color/white"/>
+                android:layout_gravity="center_vertical"
+                android:layout_margin="4dp">
 
                 <EditText
                     android:id="@+id/receiver_ip"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="2"
+                    android:hint="@string/sample_plugin_receiver_ip"
                     android:inputType="textFilter|textNoSuggestions"
                     android:textColor="@color/white"/>
 
-            </LinearLayout>
-
+            </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -96,23 +78,16 @@
                 android:fontFamily="sans-serif-condensed"
                 android:text="@string/sample_plugin_tests"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="18sp"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:background="@color/material_blue_500"/>
+                android:textColor="@color/accent"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/receiver_test_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="@string/sample_plugin_tests_description"/>
+                android:text="@string/sample_plugin_tests_description"
+                android:textColor="@color/white"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -154,18 +129,13 @@
         </LinearLayout>
     </ScrollView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_above="@+id/button_bar"
-        android:background="@drawable/shadow_bottom_top"/>
-
     <LinearLayout
         android:id="@+id/button_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@color/black"
         android:orientation="horizontal">
 
         <Button
@@ -176,13 +146,6 @@
             android:layout_weight="1"
             android:text="@android:string/cancel"/>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/divider_vertical_dark_opaque"/>
-
         <Button
             android:id="@+id/btn_ok"
             style="@style/Widget.AppCompat.Button.Borderless"
@@ -190,7 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@android:string/ok"
-            android:textColor="@color/material_blue_500"/>
+            android:textColor="@color/accent"/>
     </LinearLayout>
 
 </RelativeLayout>

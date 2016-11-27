@@ -16,6 +16,10 @@
   -->
 
 <resources>
-    <color name="material_blue_500">#ff5677fc</color>
+    <color name="dark_1">#0b171b</color>
+    <color name="dark_2">#18252a</color>
+    <color name="dark_3">#121c1f</color>
+    <color name="accent">#00cbc4</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
 </resources>

@@ -16,7 +16,7 @@
 
 package tv.yatse.plugin.avreceiver.api;
 
-import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -24,12 +24,12 @@ import android.os.Bundle;
  * The CustomCommandsActivity Activity that plugin must extend if they support adding / editing Custom Commands
  * <p/>
  * Activity should call : <br />
- * - {@link AVReceiverCustomCommandsActivity#cancelAndFinish()} to cancel any change and return to Yatse.<br/>
- * - {@link AVReceiverCustomCommandsActivity#saveAndFinish()} to return the updated pluginCustomCommand for adding / saving in Yatse.
+ * - {@link AVReceiverCustomCommandsAppCompatActivity#cancelAndFinish()} to cancel any change and return to Yatse.<br/>
+ * - {@link AVReceiverCustomCommandsAppCompatActivity#saveAndFinish()} to return the updated pluginCustomCommand for adding / saving in Yatse.
  * <p/>
- * See {@link AVReceiverCustomCommandsAppCompatActivity} for an AppCompat version
+ * See {@link AVReceiverCustomCommandsActivity} for an non AppCompat version
  */
-public class AVReceiverCustomCommandsActivity extends Activity {
+public class AVReceiverCustomCommandsAppCompatActivity extends AppCompatActivity {
 
     public final static String EXTRA_CUSTOM_COMMAND = "tv.yatse.plugin.avreceiver.EXTRA_CUSTOM_COMMAND";
 

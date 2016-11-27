@@ -18,9 +18,9 @@
     <string name="app_name">Yatse sample receiver plugin</string>
     <string name="sample_plugin_name">Sample receiver plugin</string>
     <string name="sample_plugin_description">Sample plugin</string>
-    <string name="sample_plugin_settings">Settings for :</string>
-    <string name="sample_plugin_error">Error :</string>
-    <string name="sample_plugin_receiver_ip">Receiver IP :</string>
+    <string name="sample_plugin_settings">Settings for:</string>
+    <string name="sample_plugin_error">Error:</string>
+    <string name="sample_plugin_receiver_ip">Receiver IP</string>
     <string name="sample_plugin_receiver_ip_description">This is a sample plugin, the receiver IP field will not be used.</string>
     <string name="sample_plugin_tests">Tests</string>
     <string name="sample_plugin_tests_description">You can test your settings by pressing the buttons below.</string>
@@ -28,7 +28,7 @@
     <!-- The plugin_unique_id value must be changed for any production plugin !!! -->
     <string name="plugin_unique_id" translatable="false" tools:ignore="TypographyDashes">078e6f74-1a67-4780-8318-0e749bd71cda</string>
 
-    <string name="sample_plugin_custom_command">Custom Command :</string>
+    <string name="sample_plugin_custom_command">Custom Command</string>
     <string name="sample_plugin_custom_command_description">This is a sample custom command, the parameter field will not be used.</string>
     <string name="sample_plugin_custom_command_title">Name</string>
     <string name="sample_plugin_custom_command_param1">Parameter 1</string>
