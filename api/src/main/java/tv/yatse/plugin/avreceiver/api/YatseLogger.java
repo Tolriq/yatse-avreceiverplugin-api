@@ -18,6 +18,7 @@ package tv.yatse.plugin.avreceiver.api;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -73,7 +74,7 @@ public final class YatseLogger {
         srv.putExtra(EXTRA_STRING_PARAMS2, tag);
         srv.putExtra(EXTRA_STRING_PARAMS, msg);
         try {
-            mContext.startService(srv);
+            ContextCompat.startForegroundService(mContext, srv);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,7 +95,7 @@ public final class YatseLogger {
         srv.putExtra(EXTRA_STRING_PARAMS2, tag);
         srv.putExtra(EXTRA_STRING_PARAMS, msg);
         try {
-            mContext.startService(srv);
+            ContextCompat.startForegroundService(mContext, srv);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,7 +117,7 @@ public final class YatseLogger {
         srv.putExtra(EXTRA_STRING_PARAMS2, tag);
         srv.putExtra(EXTRA_STRING_PARAMS, msg);
         try {
-            mContext.startService(srv);
+            ContextCompat.startForegroundService(mContext, srv);
         } catch (Exception e) {
             e.printStackTrace();
         }
