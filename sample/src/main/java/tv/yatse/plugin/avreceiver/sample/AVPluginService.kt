@@ -13,168 +13,143 @@
  * limitations under the License.
  *
  */
+package tv.yatse.plugin.avreceiver.sample
 
-package tv.yatse.plugin.avreceiver.sample;
-
-import android.os.Handler;
-import android.os.Looper;
-import android.text.TextUtils;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import tv.yatse.plugin.avreceiver.api.AVReceiverPluginService;
-import tv.yatse.plugin.avreceiver.api.PluginCustomCommand;
-import tv.yatse.plugin.avreceiver.api.YatseLogger;
-import tv.yatse.plugin.avreceiver.sample.helpers.PreferencesHelper;
+import android.os.Handler
+import android.os.Looper
+import android.text.TextUtils
+import android.widget.Toast
+import tv.yatse.plugin.avreceiver.api.AVReceiverPluginService
+import tv.yatse.plugin.avreceiver.api.PluginCustomCommand
+import tv.yatse.plugin.avreceiver.api.YatseLogger
+import tv.yatse.plugin.avreceiver.sample.helpers.PreferencesHelper
+import java.util.ArrayList
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Sample AVReceiverPluginService that implement all functions with dummy code that displays Toast and logs to main Yatse log system.
- * <p/>
- * See {@link AVReceiverPluginService} for documentation on all functions
+ *
+ *
+ * See [AVReceiverPluginService] for documentation on all functions
  */
-public class AVPluginService extends AVReceiverPluginService {
-    private Handler handler = new Handler(Looper.getMainLooper());
-    private static final String TAG = "AVPluginService";
+class AVPluginService : AVReceiverPluginService() {
+    private val handler = Handler(Looper.getMainLooper())
+    private var mHostUniqueId: String? = null
+    private var mHostName: String? = null
+    private var mHostIp: String? = null
+    private var mIsMuted = false
+    private var mVolumePercent = 50.0
 
-    private String mHostUniqueId;
-    private String mHostName;
-    private String mHostIp;
-
-    private boolean mIsMuted = false;
-    private double mVolumePercent = 50;
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
+    override fun getVolumeUnitType(): Int {
+        return UNIT_TYPE_PERCENT
     }
 
-    @Override
-    protected int getVolumeUnitType() {
-        return UNIT_TYPE_PERCENT;
+    override fun getVolumeMinimalValue(): Double {
+        return 0.0
     }
 
-    @Override
-    protected double getVolumeMinimalValue() {
-        return 0.0;
+    override fun getVolumeMaximalValue(): Double {
+        return 100.0
     }
 
-    @Override
-    protected double getVolumeMaximalValue() {
-        return 100.0;
+    override fun setMuteStatus(status: Boolean): Boolean {
+        YatseLogger.logVerbose(applicationContext, TAG, "Setting mute status: $status")
+        displayToast("Setting mute status : $status")
+        mIsMuted = status
+        return true
     }
 
-    @Override
-    protected boolean setMuteStatus(boolean status) {
-        YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Setting mute status : %s", status);
-        displayToast("Setting mute status : " + status);
-        mIsMuted = status;
-        return true;
+    override fun getMuteStatus(): Boolean {
+        return mIsMuted
     }
 
-    @Override
-    protected boolean getMuteStatus() {
-        return mIsMuted;
+    override fun toggleMuteStatus(): Boolean {
+        YatseLogger.logVerbose(applicationContext, TAG, "Toggling mute status")
+        displayToast("Toggling mute status")
+        mIsMuted = !mIsMuted
+        return true
     }
 
-    @Override
-    protected boolean toggleMuteStatus() {
-        YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Toggling mute status");
-        displayToast("Toggling mute status");
-        mIsMuted = !mIsMuted;
-        return true;
+    override fun setVolumeLevel(volume: Double): Boolean {
+        YatseLogger.logVerbose(applicationContext, TAG, "Setting volume level: $volume")
+        displayToast("Setting volume : $volume")
+        mVolumePercent = volume
+        return true
     }
 
-    @Override
-    protected boolean setVolumeLevel(double volume) {
-        YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Setting volume level : %s", volume);
-        displayToast("Setting volume : " + volume);
-        mVolumePercent = volume;
-        return true;
+    override fun getVolumeLevel(): Double {
+        return mVolumePercent
     }
 
-    @Override
-    protected double getVolumeLevel() {
-        return mVolumePercent;
+    override fun volumePlus(): Boolean {
+        mVolumePercent = min(100.0, mVolumePercent + 5)
+        YatseLogger.logVerbose(applicationContext, TAG, "Calling volume plus")
+        displayToast("Volume plus")
+        return true
     }
 
-    @Override
-    protected boolean volumePlus() {
-        mVolumePercent = Math.min(100.0, mVolumePercent + 5);
-        YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Calling volume plus");
-        displayToast("Volume plus");
-        return true;
+    override fun volumeMinus(): Boolean {
+        mVolumePercent = max(0.0, mVolumePercent - 5)
+        YatseLogger.logVerbose(applicationContext, TAG, "Calling volume minus")
+        displayToast("Volume minus")
+        return true
     }
 
-    @Override
-    protected boolean volumeMinus() {
-        mVolumePercent = Math.max(0.0, mVolumePercent - 5);
-        YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Calling volume minus");
-        displayToast("Volume minus");
-        return true;
+    override fun refresh(): Boolean {
+        YatseLogger.logVerbose(applicationContext, TAG, "Refreshing values from receiver")
+        return true
     }
 
-    @Override
-    protected boolean refresh() {
-        YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Refreshing values from receiver");
-        return true;
-    }
-
-    @Override
-    protected List<PluginCustomCommand> getDefaultCustomCommands() {
-        String source = getString(R.string.plugin_unique_id);
-        List<PluginCustomCommand> commands = new ArrayList<>();
+    override fun getDefaultCustomCommands(): List<PluginCustomCommand> {
+        val source = getString(R.string.plugin_unique_id)
+        val commands: MutableList<PluginCustomCommand> = ArrayList()
         // Plugin custom commands must set the source parameter to their plugin unique Id !
-        commands.add(new PluginCustomCommand().title("Sample command 1").source(source).param1("Sample command 1").type(0));
-        commands.add(new PluginCustomCommand().title("Sample command 2").source(source).param1("Sample command 2").type(1).readOnly(true));
-        return commands;
+        commands.add(PluginCustomCommand(title = "Sample command 1", source = source, param1 = "Sample command 1", type = 0))
+        commands.add(PluginCustomCommand(title = "Sample command 2", source = source, param1 = "Sample command 2", type = 1, readOnly = true))
+        return commands
     }
 
-    @Override
-    protected boolean executeCustomCommand(PluginCustomCommand customCommand) {
-        YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Executing CustomCommand : %s", customCommand.title());
-        displayToast(customCommand.param1());
-        return false;
+    override fun executeCustomCommand(customCommand: PluginCustomCommand?): Boolean {
+        YatseLogger.logVerbose(applicationContext, TAG, "Executing CustomCommand: ${customCommand!!.title}")
+        displayToast(customCommand.param1)
+        return false
     }
 
-    private void displayToast(final String message) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-            }
-        });
+    private fun displayToast(message: String?) {
+        handler.post { Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show() }
     }
 
-    @Override
-    protected void connectToHost(String uniqueId, String name, String ip) {
-        mHostUniqueId = uniqueId;
-        mHostName = name;
-        mHostIp = ip;
-        String receiverIp = PreferencesHelper.getInstance(getApplicationContext()).hostIp(mHostUniqueId);
+    override fun connectToHost(uniqueId: String?, name: String?, ip: String?) {
+        mHostUniqueId = uniqueId
+        mHostName = name
+        mHostIp = ip
+        val receiverIp = PreferencesHelper.getInstance(applicationContext).hostIp(mHostUniqueId!!)
         if (TextUtils.isEmpty(receiverIp)) {
-            YatseLogger.getInstance(getApplicationContext()).logError(TAG, "No configuration for %s", name);
+            YatseLogger.logError(applicationContext, TAG, "No configuration for $name")
         }
-        YatseLogger.getInstance(getApplicationContext()).logVerbose(TAG, "Connected to : %s / %s ", name, mHostUniqueId);
+        YatseLogger.logVerbose(
+            applicationContext, TAG, "Connected to: $name/$mHostUniqueId"
+        )
     }
 
-    @Override
-    protected long getSettingsVersion() {
-        return PreferencesHelper.getInstance(getApplicationContext()).settingsVersion();
+    override fun getSettingsVersion(): Long {
+        return PreferencesHelper.getInstance(applicationContext).settingsVersion()
     }
 
-    @Override
-    protected String getSettings() {
-        return PreferencesHelper.getInstance(getApplicationContext()).getSettingsAsJSON();
+    override fun getSettings(): String {
+        return PreferencesHelper.getInstance(applicationContext).settingsAsJSON
     }
 
-    @Override
-    protected boolean restoreSettings(String settings, long version) {
-        boolean result = PreferencesHelper.getInstance(getApplicationContext()).importSettingsFromJSON(settings, version);
+    override fun restoreSettings(settings: String?, version: Long): Boolean {
+        val result = PreferencesHelper.getInstance(applicationContext).importSettingsFromJSON(settings!!, version)
         if (result) {
-            connectToHost(mHostUniqueId, mHostName, mHostIp);
+            connectToHost(mHostUniqueId, mHostName, mHostIp)
         }
-        return result;
+        return result
+    }
+
+    companion object {
+        private const val TAG = "AVPluginService"
     }
 }

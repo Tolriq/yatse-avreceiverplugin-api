@@ -15,10 +15,9 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".Setup">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ScrollView
         android:id="@+id/receiver_settings_content"
@@ -37,13 +36,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="@string/sample_plugin_settings"
                 android:textAllCaps="true"
                 android:textColor="@color/accent"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/receiver_ip_description"
@@ -51,9 +50,9 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="@string/sample_plugin_receiver_ip_description"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -64,22 +63,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/sample_plugin_receiver_ip"
+                    android:importantForAutofill="no"
                     android:inputType="textFilter|textNoSuggestions"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="@string/sample_plugin_tests"
                 android:textAllCaps="true"
                 android:textColor="@color/accent"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/receiver_test_description"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="@string/sample_plugin_tests_description"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                     android:layout_weight="1"
                     android:contentDescription="Volume down"
                     android:src="@drawable/ic_volume_medium"
-                    tools:ignore="HardcodedText"/>
+                    tools:ignore="HardcodedText" />
 
                 <ImageButton
                     android:id="@+id/btn_toggle_mute"
@@ -113,7 +113,7 @@
                     android:layout_weight="1"
                     android:contentDescription="Toggle mute"
                     android:src="@drawable/ic_volume_off"
-                    tools:ignore="HardcodedText"/>
+                    tools:ignore="HardcodedText" />
 
                 <ImageButton
                     android:id="@+id/btn_vol_up"
@@ -123,7 +123,7 @@
                     android:layout_weight="1"
                     android:contentDescription="Volume up"
                     android:src="@drawable/ic_volume_high"
-                    tools:ignore="HardcodedText"/>
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
 
         </LinearLayout>
@@ -144,7 +144,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@android:string/cancel"/>
+            android:text="@android:string/cancel" />
 
         <Button
             android:id="@+id/btn_ok"
@@ -153,7 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@android:string/ok"
-            android:textColor="@color/accent"/>
+            android:textColor="@color/accent" />
     </LinearLayout>
 
 </RelativeLayout>

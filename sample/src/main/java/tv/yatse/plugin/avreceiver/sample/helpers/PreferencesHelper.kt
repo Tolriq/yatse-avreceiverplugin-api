@@ -13,112 +13,106 @@
  * limitations under the License.
  *
  */
+package tv.yatse.plugin.avreceiver.sample.helpers
 
-package tv.yatse.plugin.avreceiver.sample.helpers;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.text.TextUtils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Iterator;
-import java.util.Map;
-
-import tv.yatse.plugin.avreceiver.api.YatseLogger;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
+import android.text.TextUtils
+import androidx.preference.PreferenceManager
+import org.json.JSONException
+import org.json.JSONObject
+import tv.yatse.plugin.avreceiver.api.YatseLogger.logError
 
 /**
  * Sample PreferencesHelper that shows an easy way to correctly support the API
- * <p/>
- * - Support configuration per media center via the media center uniqueId<br />
- * - Support backup / restore of settings via Yatse<br />
- * - Integrate an automated settings versioning for easier integration<br />
+ *
+ *
+ * - Support configuration per media center via the media center uniqueId<br></br>
+ * - Support backup / restore of settings via Yatse<br></br>
+ * - Integrate an automated settings versioning for easier integration<br></br>
  */
-public class PreferencesHelper {
-    private volatile static PreferencesHelper INSTANCE;
+class PreferencesHelper private constructor(context: Context) {
 
-    private static final String TAG = "PreferencesHelper";
+    private val mPreferences: SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(context)
+    private val mContext: Context = context
 
-    private final SharedPreferences mPreferences;
-    private Context mContext;
-
-    protected PreferencesHelper(Context context) {
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        mContext = context;
-    }
-
-    public static PreferencesHelper getInstance(Context context) {
-        if (INSTANCE == null) {
-            synchronized (PreferencesHelper.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new PreferencesHelper(context);
+    val settingsAsJSON: String
+        get() {
+            val settings = JSONObject()
+            try {
+                for (entry: Map.Entry<String, *> in mPreferences.all.entries) {
+                    if (entry.value == null) {
+                        settings.put(entry.key, null)
+                    } else {
+                        settings.put(entry.key, entry.value.toString())
+                    }
                 }
+            } catch (e: JSONException) {
+                logError(mContext, TAG, "Error encoding settings", e)
             }
+            return settings.toString()
         }
-        return INSTANCE;
-    }
 
-    public String getSettingsAsJSON() {
-        JSONObject settings = new JSONObject();
+    fun importSettingsFromJSON(settings: String, version: Long): Boolean {
         try {
-            for (Map.Entry<String, ?> entry : mPreferences.getAll().entrySet()) {
-                Object val = entry.getValue();
-                if (val == null) {
-                    settings.put(entry.getKey(), null);
-                } else {
-                    settings.put(entry.getKey(), String.valueOf(entry.getValue()));
-                }
-            }
-        } catch (JSONException e) {
-            YatseLogger.getInstance(mContext).logError(TAG, "Error encoding settings", e);
-        }
-        return settings.toString();
-    }
-
-    public boolean importSettingsFromJSON(String settings, long version) {
-        try {
-            JSONObject data = new JSONObject(settings);
-            Iterator<String> keys = data.keys();
-
-            SharedPreferences.Editor mEditor = mPreferences.edit();
+            val data = JSONObject(settings)
+            val keys = data.keys()
+            val mEditor = mPreferences.edit()
             while (keys.hasNext()) {
-                String key = keys.next();
+                val key = keys.next()
                 if (!TextUtils.equals(key, "settings_version")) {
-                    mEditor.putString(key, data.getString(key));
+                    mEditor.putString(key, data.getString(key))
                 }
             }
-            mEditor.apply();
-            settingsVersion(version);
-        } catch (JSONException e) {
-            YatseLogger.getInstance(mContext).logError(TAG, "Error decoding settings", e);
+            mEditor.apply()
+            settingsVersion(version)
+        } catch (e: JSONException) {
+            logError(mContext, TAG, "Error decoding settings", e)
         }
-        return true;
+        return true
     }
 
-
-    public String hostIp(String hostUniqueId) {
-        return mPreferences.getString("host_ip_" + hostUniqueId, "");
+    fun hostIp(hostUniqueId: String): String {
+        return mPreferences.getString("host_ip_$hostUniqueId", "") ?: ""
     }
 
-    public void hostIp(String hostUniqueId, String ip) {
+    fun hostIp(hostUniqueId: String, ip: String?) {
         if (!TextUtils.equals(hostIp(hostUniqueId), ip)) {
-            settingsVersion(settingsVersion() + 1);
+            settingsVersion(settingsVersion() + 1)
         }
-        SharedPreferences.Editor mEditor = mPreferences.edit();
-        mEditor.putString("host_ip_" + hostUniqueId, ip);
-        mEditor.apply();
+        val mEditor = mPreferences.edit()
+        mEditor.putString("host_ip_$hostUniqueId", ip)
+        mEditor.apply()
     }
 
-    public long settingsVersion() {
-        return mPreferences.getLong("settings_version", 0);
+    fun settingsVersion(): Long {
+        return mPreferences.getLong("settings_version", 0)
     }
 
-    public void settingsVersion(long settingsVersion) {
-        SharedPreferences.Editor mEditor = mPreferences.edit();
-        mEditor.putLong("settings_version", settingsVersion);
-        mEditor.apply();
+    fun settingsVersion(settingsVersion: Long) {
+        mPreferences.edit()
+            .putLong("settings_version", settingsVersion)
+            .apply()
+    }
+
+    companion object {
+        @SuppressLint("StaticFieldLeak")
+        @Volatile
+        private var INSTANCE: PreferencesHelper? = null
+        private const val TAG = "PreferencesHelper"
+
+        fun getInstance(context: Context): PreferencesHelper {
+            if (INSTANCE == null) {
+                synchronized(PreferencesHelper::class.java) {
+                    if (INSTANCE == null) {
+                        INSTANCE = PreferencesHelper(context)
+                    }
+                }
+            }
+            return INSTANCE!!
+        }
     }
 
 }

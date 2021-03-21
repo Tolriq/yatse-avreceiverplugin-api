@@ -14,8 +14,7 @@
 
   -->
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,23 +36,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="@string/sample_plugin_custom_command"
                 android:textAllCaps="true"
                 android:textColor="@color/accent"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="@string/sample_plugin_custom_command_description"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -64,11 +63,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/sample_plugin_custom_command_title"
+                    android:importantForAutofill="no"
                     android:inputType="textFilter|textNoSuggestions"
-                    android:textColor="@color/white"/>
-            </android.support.design.widget.TextInputLayout>
+                    android:textColor="@color/white" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -79,10 +79,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/sample_plugin_custom_command_param1"
+                    android:importantForAutofill="no"
                     android:inputType="textFilter|textNoSuggestions"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
     </ScrollView>
@@ -96,8 +97,8 @@
         android:measureWithLargestChild="true"
         android:orientation="horizontal"
         android:paddingLeft="2dip"
-        android:paddingRight="2dip"
-        android:paddingTop="0dip">
+        android:paddingTop="0dip"
+        android:paddingRight="2dip">
 
         <Button
             android:id="@+id/btn_cancel"
@@ -105,7 +106,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@android:string/cancel"/>
+            android:text="@android:string/cancel" />
 
         <Button
             android:id="@+id/btn_save"
@@ -114,6 +115,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/save"
-            android:textColor="@color/accent"/>
+            android:textColor="@color/accent" />
     </LinearLayout>
 </RelativeLayout>
