@@ -41,10 +41,8 @@ open class AVReceiverCustomCommandsActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        intent?.let {
-            isEditing = intent.hasExtra(EXTRA_CUSTOM_COMMAND)
-            pluginCustomCommand = intent.getParcelableExtra(EXTRA_CUSTOM_COMMAND) ?: PluginCustomCommand()
-        }
+        isEditing = intent?.hasExtra(EXTRA_CUSTOM_COMMAND) ?: false
+        pluginCustomCommand = intent?.getParcelableExtra(EXTRA_CUSTOM_COMMAND) ?: PluginCustomCommand()
         setResult(RESULT_CANCELED, Intent())
     }
 
